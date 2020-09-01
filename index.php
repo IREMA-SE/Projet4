@@ -16,11 +16,11 @@
 		<div class="container">
 				<!-- container - wraps whole page -->
 	    
-        		<!-- menu -->
+        		<!-- Insertion du Menu -->
         		<?php include('sections/menu.php') ?>
         		<!-- // menu -->
         
-        		<!-- banner -->
+        		<!-- Insertion home main banner -->
         		<?php include('sections/banner.php') ?>
         		<!-- // banner -->
 		    <div class="content">
