@@ -4,7 +4,7 @@
         $auteur = $_POST["auteur"]; 
         $commentaire = $_POST["commentaire"];
         
-        //add here code to insert into database
+        //Ajout de commentaire à la BD
         $req = $bdd->prepare('INSERT INTO commentaires(auteur, commentaire, CURDATE())');
         $req->execute(array(
             'auteur' => $auteur,

@@ -1,3 +1,4 @@
+<?php  include('connection.php'); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,15 +12,6 @@
         <p>Dernières publications :</p>
  
 <?php
-// Connexion à la base de données
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=mydbname;charset=utf8', 'root', '');
-}
-catch(Exception $e)
-{
-        die('Erreur : '.$e->getMessage());
-}
 
 // On récupère les 5 dernières publications par ordre décroissant
 $req = $bdd->query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 0, 5');
