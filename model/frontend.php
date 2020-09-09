@@ -25,16 +25,3 @@ function getComments($postId)
 
     return $comments;
 }
-
-function dbConnect()
-{
-    try
-    {
-        $db = new PDO('mysql:host=localhost;mydbname=test;charset=utf8', 'dbuser', '');
-        return $db;
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
-}
