@@ -1,51 +1,79 @@
 <?php
 
-//namespace OpenClassrooms\Blog\Model;
+// \OpenClassrooms\Blog\Model\usersManager;
 
 require_once("manager.php");
 
-
-class PostManager extends Manager
+class usersManager extends Manager
 {
-    public function getPosts()
-    {
-        $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 10');
-
-        return $req;
-    }
-
-	public function delPost($postId)
+    public function getUsers($userid)
 	{
 		$db = $this->dbConnect();
-		$affectedLines = $db->query('DELETE FROM posts WHERE id = ' . $postId);
-		   
-		return $affectedLines;
-	}
-    public function getPost($postId)
-    {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin\') AS creation_date_fr FROM posts WHERE id = ?');
-        $req->execute(array($postId));
-        $post = $req->fetch();
+		$req = $db->query('SELECT * FROM users WHERE Id != '.$userid.' ORDER BY Id DESC LIMIT 0, 7');
 
-        return $post;
-    }
-	public function postBlog($id, $title, $content){
-		
+		return $req;
+	}
+	
+	public function get_user($id)
+	{
 		$db = $this->dbConnect();
+		$req = $db->prepare('SELECT * FROM users WHERE id = ?');
+		$req->execute(array($id));
+		$user = $req->fetch();
+	
+		return $user;
+	}
+
+    public function loginfun($email, $password)
+	{
+			$db = $this->dbConnect();
+			
+			$req = $db->query('SELECT * FROM users WHERE email = "'.$email.'"');
+		   	$user = $req->fetch();
+			
+			if($user != null){
+				if($user["password"] != md5($password)){
+					return null;
+				}
+			}
+			
+			return $user;
+	}
 		
-		if($id > 0){
+	public function addNewuser($id, $name, $email, $password, $userlevel){
+			$db = $this->dbConnect();
+            
+            if($password != ""){
+            	$password = md5($password);
+            }
+            
+			//check first if record exist
+			$exuser = $db->query('SELECT Id FROM users WHERE Id != '.$id.' AND email = "'.$email.'"');
+	   
+			$exuser = $exuser->fetch();
+		
+			if($exuser != null){
+				return 0;
+			}
+		
+			if($id > 0){
 			
+				//$db = dbConnect();
+                if($password == ""){
+                	$affectedLines = $db->query('UPDATE users SET name = "'. $name . '", email = "'.$email.'", level = '.$userlevel.' WHERE id = ' . $id);
+                }else{
+                	$affectedLines = $db->query('UPDATE users SET name = "'. $name . '", email = "'.$email.'",  password = "'.$password.'", level = '.$userlevel.' WHERE id = ' . $id);
+                }
+				
 			
-			$affectedLines = $db->query('UPDATE posts SET title = "'. $title . '", content = "'.$content.'" WHERE id = ' . $id);
-		   
-			return $affectedLines;
+				return $affectedLines;
 		}else{
-			$comments = $db->prepare('INSERT INTO posts( title, content, creation_date) VALUES(?, ?, NOW())');
-			$affectedLines = $comments->execute(array($title, $content));
-	 
+			//$db = dbConnect();
+			$comments = $db->prepare('INSERT INTO users( name, email, level, password) VALUES(?, ?, ?, ?)');
+			$affectedLines = $comments->execute(array($name, $email, $userlevel, $password, ));
+		
 			return $affectedLines;
 		}
 	}
 }
+
