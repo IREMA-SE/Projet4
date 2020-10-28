@@ -1,21 +1,19 @@
 <?php ob_start(); ?>
-    <div class="container">
-        <h1>Liste des commentaires</h1>
-        
-        <?php
-        
+
+
+        <h3>Commentaires des lecteurs</h3>      
+        <?php  
         while ($data = $posts->fetch())
         {
         ?>
-            <div class="news">
-                <h3>
+                <h4>
                     Post:<?= htmlspecialchars($data['title']) ?>
-                </h3>
+                </h4>
                 <p>
                     Author: <?= htmlspecialchars($data['author']) ?><br />
                 <br />
                 
-                   Commnt: <?= nl2br(htmlspecialchars($data['comment'])) ?>
+                   Commnt: <?= $data['comment'] ?>
                     <br />
                    
                     <?php 
@@ -33,12 +31,10 @@
             			}
             			?>
                     </p>
-                </div>
-        </div>
-    <?php
-    }
-    $posts->closeCursor();
-    $content = ob_get_clean();
-    ?>
-    <?php require('template.php'); ?>
-</div>
+        
+		<?php
+		}
+		$posts->closeCursor();
+		$content = ob_get_clean();
+		?>
+	<?php require('template.php'); ?>
