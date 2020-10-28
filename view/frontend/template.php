@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Blog JF</title>
         <title>JF Blog | Accueil </title>
-    	<link rel="apple-touch-icon" sizes="180x180" href='images/apple-touch-icon.png'>
-        <link rel="icon" type="image/png" sizes="32x32" href='images/favicon-32x32.png'>
-        <link rel="icon" type="image/png" sizes="16x16" href='images/favicon-16x16.png'>
-    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    	<link href="public/css/style.css" rel="stylesheet" /> 
+        <link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon-16x16.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="public/css/style.css?v=2" rel="stylesheet" /> 
     </head>
         
    
@@ -30,8 +29,8 @@
         				if(isset($_SESSION["logged"]) && $_SESSION["logged"] == 1){
         					if($user["level"] == 1){
         						?>
-        						<a href="index.php?action=users">Liste des utilisateurs I</a>
-        						<a href="index.php?action=listcomments">Les Commentaires à valider I</a>
+        						<a href="index.php?action=users">Les utilisateurs I</a>
+        						<a href="index.php?action=listcomments">Commentaires à valider I</a>
         						<?php
         					}
         					?>
@@ -46,46 +45,59 @@
         			?>
         		</div>
         		<!--BODY SECTION HEADER MENU-->
-        		<div class="menu">
-        			<div class="logo_div">
-        				<a href="index.php"><h1>Jean Forteroche</h1></a>
-        				<p id="fonction-jf">Acteur et Ecrivain</p>
-        			</div>
-        			<ul>
-        			  <li><a class="active" href="index.php">Accueil</a></li>
-        			  <li><a href="#news">Bibliographie</a></li>
-        			  <li><a href="#about">Biographie</a></li>
-        			  <li><a href="#about">Distinctions honorifiques </a></li>
-        			  <li><a href="#contact">Contact</a></li>
-        			</ul>
-        		</div>
         		
+                <header class="header">
+
+                    <a href="" class="logo"><h1>Jean Forteroche</h1>
+                    <p id="fonction-jf">Acteur et Ecrivain</p>
+                    </a>
+                    <input class="menu-btn" type="checkbox" id="menu-btn" />
+                    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                    <ul class="menu">
+                      <li><a class="active" href="index.php">Accueil</a></li>
+                    <li><a href="#news">Les chapitres</a></li>
+                    <li><a href="#about">Bibliographie</a></li>
+                    <li><a href="#about">Distinctions honorifiques </a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    </ul>
+				</header>
         		
         		<!--BODY SECTION MAIN TOP-->
         		<?php if (isset($_SESSION['user']['username'])) { ?>
-        			<div class="logged_in_info">
+        		<div class="logged_in_info">
         				<span>Bonjour et Bienvenue <?php echo $_SESSION['user']['username'] ?></span>
         				|
         				<span><a href="logout.php">logout</a></span>
-        			</div>
+        		</div>
         		<?php }else{ ?>
-        			<div class="banner">
+        		<div class="banner">
         				<div class="welcome_msg">
-        					<h1>"Billet simple pour l'Alaska"</h1>
-        					<p> 
-        						est mon prochain roman sur lequel <br> 
-        						je travaille actuellement. <br> 
-        						Je vais le publier par épisode<br>
-        						sur ce site. Bonne lecture!
-        						<span></span>
-        					</p>
+							<div class="welcome-txt">
+								<span id="letitreduroman">Billet simple pour l'Alaska</span><br>
+									Billet simple pour l'Alaska est le titre de mon prochain roman sur lequel<br> 
+									je travaille actuellement. Je vais le publier par épisode sur ce blog. <br>Bonne lecture!
+							</div>
+							<div class="welcome-img">
+								<img src="public//images/jf.png" alt="Photo portrait de Jean Forteroche">
+							</div>
         				</div>
-        			</div><!--DEBUT CONTENT-->
-        		<?php 
-        		}
-        		
-        		echo $content; ?>
-
+        		</div>
+                
+                
+                
+                <!--DEBUT CONTENT-->
+                  <?php 
+                  }
+                  
+                  if(isset($_GET["error"]) && $_GET["error"]){
+					echo '<p class="error">'.$_GET["error"].'</p>';
+				}
+                  
+                  
+                  echo $content; ?>
+				<!--FIN CONTENT-->
+                
+                
                 
         		<!--BODY SECTION FOOTER-->
         		<div class="footer">
