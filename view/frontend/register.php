@@ -1,10 +1,6 @@
 <?php ob_start(); ?>
-
-<div class="container">
-    <h2>S'inscrire</h2>
-    
+    <h4>S'inscrire</h4> 
     <?= $error; ?>
-    
     <form action="index.php?action=register" method="post">
     	<div>
         	<label for="name">Name</label><br />
@@ -22,6 +18,5 @@
             <input type="submit" />
         </div>
     </form>
-</div>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
