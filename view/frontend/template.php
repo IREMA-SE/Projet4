@@ -10,7 +10,6 @@
         <link href="public/css/style.css?v=2" rel="stylesheet" /> 
     </head>
         
-   
     <body>
 
 		<!--JS FOR TEXT EDITOR-->
@@ -24,25 +23,7 @@
 		<!--//BODY SECTION TOP HEADER MENU-->
 		<div class="container">
         		<div class="topbanner"> 
-        			<a href="index.php">Home I</a>
-        			<?php
-        				if(isset($_SESSION["logged"]) && $_SESSION["logged"] == 1){
-        					if($user["level"] == 1){
-        						?>
-        						<a href="index.php?action=users">Les utilisateurs I</a>
-        						<a href="index.php?action=listcomments">Commentaires à valider I</a>
-        						<?php
-        					}
-        					?>
-        					<a href="index.php?action=logout">Se déconnecter I</a>
-        					<?php
-        				}else{
-        					?>
-        					<a href="index.php?action=register">S'inscrire I</a>
-        					<a href="index.php?action=login">Se connecter I</a>
-        					<?php
-        				}
-        			?>
+        			<a href="index.php">JF</a>
         		</div>
         		<!--BODY SECTION HEADER MENU-->
         		
@@ -54,11 +35,26 @@
                     <input class="menu-btn" type="checkbox" id="menu-btn" />
                     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
                     <ul class="menu">
-                      <li><a class="active" href="index.php">Accueil</a></li>
-                    <li><a href="#news">Les chapitres</a></li>
-                    <li><a href="#about">Bibliographie</a></li>
-                    <li><a href="#about">Distinctions honorifiques </a></li>
-                    <li><a href="#contact">Contact</a></li>
+					<li><a href="index.php">Accueil</a></li>
+        			<?php
+        				if(isset($_SESSION["logged"]) && $_SESSION["logged"] == 1){
+        					if($user["level"] == 1){
+        						?>
+        						<li><a href="index.php?action=users">Les utilisateurs</a></li>
+        						<li><a href="index.php?action=listcomments">Commentaires à valider</a></li>
+        						<?php
+        					}
+        					?>
+        					<li><a href="index.php?action=logout">Se déconnecter</a></li>
+        					<?php
+        				}else{
+        					?>
+        					<li><a href="index.php?action=register">S'inscrire</a></li>
+        					<li><a href="index.php?action=login">Se connecter</a></li>
+        					<?php
+        				}
+        			?>
+										
                     </ul>
 				</header>
         		
