@@ -258,7 +258,7 @@ function addComment($postId, $comment)
 	global $commentmanger;
 	global $user;
 	
-	$author = $user["Id"] . " - " . $user["name"];
+	$author = $user["name"];
 	
     $affectedLines = $commentmanger->postComment($postId, $author, $comment);
 
